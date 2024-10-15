@@ -36,10 +36,15 @@ const server = http.createServer((req, res) => {
             /*
             // writeFile
             */
-            fs.writeFileSync('message.txt', message); // blocking execution
-            res.statusCode = 302; // redirect
-            res.setHeader('Location', '/');
-            return res.end();
+            fs.writeFile('message.txt', message, err => { // non blocking
+                res.statusCode = 302; // redirect
+                res.setHeader('Location', '/');
+                return res.end();
+            });
+            // fs.writeFileSync('message.txt', message); // blocking execution
+            // res.statusCode = 302; // redirect
+            // res.setHeader('Location', '/');
+            // return res.end();
         })
     }
     console.log(req.url, req.method, req.headers);
