@@ -13,7 +13,7 @@ const server = http.createServer((req, res) => {
         res.write(`
             <body>
                 <form action="/message" method="POST">
-                    <input type="text" name="message">
+                    <input type="text" name="messageForServer">
                     <button type="submit">Send</button>
                 </form>
             </body>`);
@@ -21,13 +21,26 @@ const server = http.createServer((req, res) => {
         return res.end();
     }
     if (url === '/message' && method === 'POST') {
-        /*
-        // writeFile
-        */
-        fs.writeFileSync('message.txt', 'DUMMY');
-        res.statusCode = 302; // redirect
-        res.setHeader('Location', '/');
-        return res.end();
+        const body = []; //req body
+        // when a new chunk is read, this gets triggered
+        req.on('data', (chunk) => {
+            console.log('chunk', chunk)
+            body.push(chunk);
+        });
+        return req.on('end', () => {
+            // Buffer : NodeJS global thing
+            const parsedBody = Buffer.concat(body).toString(); //out req contains text
+            console.log('parsedBody', parsedBody)
+            const message = parsedBody.split('=')[1];
+
+            /*
+            // writeFile
+            */
+            fs.writeFileSync('message.txt', message); // blocking execution
+            res.statusCode = 302; // redirect
+            res.setHeader('Location', '/');
+            return res.end();
+        })
     }
     console.log(req.url, req.method, req.headers);
     res.setHeader('Content-Type', 'text/html');
