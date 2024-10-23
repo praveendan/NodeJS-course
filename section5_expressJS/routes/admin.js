@@ -1,3 +1,5 @@
+const path = require('path')
+
 const express = require('express');
 
 const bodyParser = require('body-parser');
@@ -11,7 +13,8 @@ router.use(bodyParser.urlencoded({ extended: false }));
 // order matters
 router.get('/add-product', (req, res, next) => {
     console.log('in add product middleware');
-    res.send('<form action="/admin/add-product" method="POST"><input type="text" name="title"/><button type="submit">add</button></form>');
+    //__dirname is global var directing to the routes folder. stores the absolute path
+    res.sendFile(path.join(__dirname, '../', 'views', 'add-product.html'))
 });
 
 router.post('/add-product', (req, res, _) => {

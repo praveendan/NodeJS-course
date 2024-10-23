@@ -1,3 +1,5 @@
+const path = require('path');
+
 const express = require('express');
 
 const router = express.Router();
@@ -5,8 +7,8 @@ const router = express.Router();
 // get will make sure exact path
 router.get('/', (req, res, next) => {
     console.log('in / middleware');
-    //defaut response is text/html
-    res.send('<h1>hello from the other side</h1>');
+    //__dirname is global var directing to the routes folder. stores the absolute path
+    res.sendFile(path.join(__dirname, '../', 'views', 'shop.html'));
 });
 
 module.exports = router;
