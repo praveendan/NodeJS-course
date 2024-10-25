@@ -7,6 +7,10 @@ const shopRoutes = require('./routes/shop');
 
 const app = express();
 
+//opening public folder to the public to access (read only)
+//if anyone tries to access static files (css, js) they will get the data from public folder
+app.use(express.static(path.join(__dirname, 'public')));
+
 // routes starting with admin goes here
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
