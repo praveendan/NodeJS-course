@@ -7,6 +7,12 @@ const shopRoutes = require('./routes/shop');
 
 const app = express();
 
+// set will set any value globally within the app
+// setting the default templating engine
+app.set('view engine', 'pug');
+// where to find the templates (this is default val so not necessary to set views folder explicitly)
+app.set('views', 'views');
+
 //opening public folder to the public to access (read only)
 //if anyone tries to access static files (css, js) they will get the data from public folder
 app.use(express.static(path.join(__dirname, 'public')));
