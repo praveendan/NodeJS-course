@@ -12,6 +12,7 @@ const app = express();
 app.use(express.static(path.join(__dirname, 'public')));
 
 // routes starting with admin goes here
+//app.use() will respond to any path that starts with /admin
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 
