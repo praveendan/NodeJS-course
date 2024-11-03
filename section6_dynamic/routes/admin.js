@@ -5,9 +5,6 @@ const express = require('express');
 const rootDir = require('../util/path');
 
 const router = express.Router();
-const bodyParser = require('body-parser');
-
-router.use(bodyParser.urlencoded({ extended: false }));
 
 const products = [];
 
@@ -15,7 +12,10 @@ const products = [];
 router.get('/add-product', (req, res, next) => {
   res.render('add-product', {
     pageTitle: 'Add Product',
-    path: '/admin/add-product'
+    path: '/admin/add-product',
+    formsCSS: true,
+    productCSS: true,
+    activeAddProduct: true
   });
 });
 

@@ -1,17 +1,32 @@
 const path = require('path')
 
 const express = require('express');
+const expressHbs = require('express-handlebars');
 
 const adminData = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
 const app = express();
 
-// set will set any value globally within the app
-// setting the default templating engine
-app.set('view engine', 'pug');
-// where to find the templates (this is default val so not necessary to set views folder explicitly)
+// setting the templating engine as handlebars
+app.engine(
+    'hbs',
+    expressHbs({
+        layoutsDir: 'views/layouts/',
+        defaultLayout: 'main-layout',
+        extname: 'hbs'
+    })
+);
+app.set('view engine', 'hbs');
 app.set('views', 'views');
+
+
+
+// set will set any value globally within the app
+// setting the default templating engine as pug
+// app.set('view engine', 'pug');
+// where to find the templates (this is default val so not necessary to set views folder explicitly)
+// app.set('views', 'views');
 
 //opening public folder to the public to access (read only)
 //if anyone tries to access static files (css, js) they will get the data from public folder
