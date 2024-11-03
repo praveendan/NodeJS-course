@@ -1,24 +1,32 @@
 const path = require('path')
 
 const express = require('express');
-const expressHbs = require('express-handlebars');
+const bodyParser = require('body-parser');
+
+// const expressHbs = require('express-handlebars');
 
 const adminData = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
 const app = express();
 
-// setting the templating engine as handlebars
-app.engine(
-    'hbs',
-    expressHbs({
-        layoutsDir: 'views/layouts/',
-        defaultLayout: 'main-layout',
-        extname: 'hbs'
-    })
-);
-app.set('view engine', 'hbs');
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.set('view engine', 'ejs');
 app.set('views', 'views');
+
+// setting the templating engine as handlebars
+// app.engine(
+//     'hbs',
+//     expressHbs({
+//         layoutsDir: 'views/layouts/',
+//         defaultLayout: 'main-layout',
+//         extname: 'hbs'
+//     })
+// );
+// app.set('view engine', 'hbs');
+// app.set('views', 'views');
 
 
 
