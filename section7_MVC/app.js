@@ -3,7 +3,9 @@ const path = require('path')
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const adminData = require('./routes/admin');
+const errorController = require('./controllers/error')
+
+const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
 const app = express();
@@ -20,11 +22,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // routes starting with admin goes here
 //app.use() will respond to any path that starts with /admin
-app.use('/admin', adminData.routes);
+app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 
-app.use((req, res, next) => {
-    res.status(404).render('404', { pageTitle: 'Page Not Found' });
-});
+app.use(errorController.get404);
 
 app.listen(3000);
