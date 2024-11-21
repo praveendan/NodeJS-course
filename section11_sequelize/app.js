@@ -4,7 +4,17 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const errorController = require('./controllers/error');
-const sequelize = require('./util/database')
+const sequelize = require('./util/database');
+const Product = require('./models/product');
+const User = require('./models/user');
+
+// User created Prods
+Product.belongsTo(User, {
+    constraints: true,
+    onDelete: 'CASCADE'
+})
+
+User.hasMany(Product)
 
 const app = express();
 
@@ -23,7 +33,7 @@ app.use(shopRoutes);
 app.use(errorController.get404);
 
 sequelize
-    .sync()
+    .sync({ force: true }) // force: true forces the changes Do not do in Prod.!
     .then(result => {
         // console.log(result);
         app.listen(3000);
