@@ -14,13 +14,35 @@ exports.postAddProduct = (req, res, next) => {
   const price = req.body.price;
   const description = req.body.description;
 
-  Product
-    .create({ title, price, imageUrl, description })
+  // this is automatically available when you create modals and relationships.
+  // refer sequelize docs for more info
+  req
+    .user
+    .createProduct({
+      title,
+      price,
+      imageUrl,
+      description
+    })
     .then(result => {
       res.redirect('/')
       console.log(result)
     })
     .catch(err => console.log(err));
+
+  // Product
+  //   .create({
+  //     title,
+  //     price,
+  //     imageUrl,
+  //     description,
+  //     userId: req.user.id
+  //   })
+  //   .then(result => {
+  //     res.redirect('/')
+  //     console.log(result)
+  //   })
+  //   .catch(err => console.log(err));
 };
 
 exports.getEditProduct = (req, res) => {
