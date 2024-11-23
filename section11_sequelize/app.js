@@ -7,14 +7,22 @@ const errorController = require('./controllers/error');
 const sequelize = require('./util/database');
 const Product = require('./models/product');
 const User = require('./models/user');
+const Cart = require('./models/cart');
+const CartItem = require('./models/cart-item');
 
 // User created Prods
 Product.belongsTo(User, {
     constraints: true,
     onDelete: 'CASCADE'
 })
-
-User.hasMany(Product)
+User.hasMany(Product);
+//user has one cart
+User.hasOne(Cart);
+Cart.belongsTo(User); // optional
+// product can be in many carts and cart can contain many products
+// through will specify how this relationship is created (through which table)
+Cart.belongsToMany(Product, { through: CartItem });
+Product.belongsToMany(Cart, { through: CartItem });
 
 const app = express();
 
