@@ -9,6 +9,8 @@ const Product = require('./models/product');
 const User = require('./models/user');
 const Cart = require('./models/cart');
 const CartItem = require('./models/cart-item');
+const Order = require('./models/order');
+const OrderItem = require('./models/order-item');
 
 // User created Prods
 Product.belongsTo(User, {
@@ -23,6 +25,14 @@ Cart.belongsTo(User); // optional
 // through will specify how this relationship is created (through which table)
 Cart.belongsToMany(Product, { through: CartItem });
 Product.belongsToMany(Cart, { through: CartItem });
+
+//order has one user
+//user can have many orders
+//order and products are connected through orderItems table
+//order can have many products and a product can belong to many orders
+Order.belongsTo(User);
+User.hasMany(Order);
+Order.belongsToMany(Product, { through: OrderItem });
 
 const app = express();
 
@@ -53,7 +63,7 @@ app.use(errorController.get404);
 
 sequelize
     .sync()
-    // .sync({ force: true }) // force: true forces the changes Do not do in Prod.!
+    //.sync({ force: true }) // force: true forces the changes Do not do in Prod.!
     .then(result => {
         // console.log(result);
         return User.findByPk(1)
