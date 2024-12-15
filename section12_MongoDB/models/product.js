@@ -25,7 +25,7 @@ class Product {
     const db = getDb();
     return db
       .collection('products')
-      .find()
+      .find() // returns a cursor
       .toArray()
       .then(products => {
         console.log(products);
