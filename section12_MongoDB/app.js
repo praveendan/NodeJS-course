@@ -18,10 +18,11 @@ const shopRoutes = require('./routes/shop');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+// save the user in one central place and access it anywhere
 app.use((req, res, next) => {
   User.findById('677ac02855fef172f4e8839b')
     .then(user => {
-      req.user = user;
+      req.user = new User(user.name, user.email, user.cart, user._id);
       next();
     })
     .catch(err => console.log(err));
