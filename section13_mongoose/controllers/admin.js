@@ -71,7 +71,10 @@ exports.postEditProduct = (req, res, next) => {
 
 exports.getProducts = (req, res, next) => {
   Product.find()
+    // .select('title price -_id') //a select clause to select fields
+    // .populate('userId', 'name') //populate will load related data and second param will pick fields to get the default will get all
     .then(products => {
+      console.log(products);
       res.render('admin/products', {
         prods: products,
         pageTitle: 'Admin Products',
