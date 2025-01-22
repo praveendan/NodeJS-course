@@ -20,7 +20,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
   // save the user in one central place and access it anywhere
-  User.findById('677ac02855fef172f4e8839b')
+  User.findById('67873dbd94ccb92557ffd3de')
     .then(user => {
       req.user = user;
       next();

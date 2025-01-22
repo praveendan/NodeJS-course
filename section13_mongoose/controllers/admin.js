@@ -13,7 +13,13 @@ exports.postAddProduct = (req, res, next) => {
   const imageUrl = req.body.imageUrl;
   const price = req.body.price;
   const description = req.body.description;
-  const product = new Product({ title, price, description, imageUrl });
+  const product = new Product({
+    title: title,
+    price: price,
+    description: description,
+    imageUrl: imageUrl,
+    userId: req.user
+  });
   product
     .save() // comes from mongoose
     .then(result => {
@@ -71,8 +77,8 @@ exports.postEditProduct = (req, res, next) => {
 
 exports.getProducts = (req, res, next) => {
   Product.find()
-    // .select('title price -_id') //a select clause to select fields
-    // .populate('userId', 'name') //populate will load related data and second param will pick fields to get the default will get all
+    // .select('title price -_id')
+    // .populate('userId', 'name')
     .then(products => {
       console.log(products);
       res.render('admin/products', {
