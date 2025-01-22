@@ -43,8 +43,10 @@ app.use(
 );
 
 app.use((req, res, next) => {
-  // save the user in one central place and access it anywhere
-  User.findById('67873dbd94ccb92557ffd3de')
+  if (!req.session.user) {
+    return next();
+  }
+  User.findById(req.session.user._id)
     .then(user => {
       req.user = user;
       next();
