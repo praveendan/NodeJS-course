@@ -1,11 +1,17 @@
 const path = require('path');
 
 const express = require('express');
+// Parse incoming request bodies in a middleware before your handlers, available under the req.body property
 const bodyParser = require('body-parser');
+//handle mongo
 const mongoose = require('mongoose');
+//handle session
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
+//handle csrf tokens
 const csrf = require('csurf');
+//handle server errors
+const flash = require('connect-flash');
 
 const errorController = require('./controllers/error');
 const User = require('./models/user');
@@ -44,6 +50,7 @@ app.use(
   })
 );
 app.use(csrfProtection);
+app.use(flash());
 
 app.use((req, res, next) => {
   if (!req.session.user) {
