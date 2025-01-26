@@ -36,4 +36,3 @@ app.use(errorController.get404);
 mongoConnect(() => {
   app.listen(3000);
 });
-//user name praveendan pw:fW9WF1TbIMGZBKWQ

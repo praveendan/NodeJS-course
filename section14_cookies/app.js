@@ -9,8 +9,7 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 const errorController = require('./controllers/error');
 const User = require('./models/user');
 
-const MONGODB_URI =
-  'mongodb+srv://praveendan:fW9WF1TbIMGZBKWQ@nodejs-course.27hsh.mongodb.net/mongoose_nodeJS_course?w=majority&appName=NodeJS-course';
+const MONGODB_URI = '<server link>'
 
 const app = express();
 const store = new MongoDBStore({
@@ -80,4 +79,3 @@ mongoose
   .catch(err => {
     console.log(err);
   });
-//user name praveendan pw:fW9WF1TbIMGZBKWQ

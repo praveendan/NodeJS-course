@@ -34,9 +34,7 @@ app.use(shopRoutes);
 app.use(errorController.get404);
 
 mongoose
-  .connect(
-    'mongodb+srv://praveendan:fW9WF1TbIMGZBKWQ@nodejs-course.27hsh.mongodb.net/mongoose_nodeJS_course?retryWrites=true&w=majority&appName=NodeJS-course'
-  )
+  .connect('<server link>')
   .then(result => {
     User.findOne().then(user => {
       if (!user) {
@@ -55,4 +53,3 @@ mongoose
   .catch(err => {
     console.log(err);
   });
-//user name praveendan pw:fW9WF1TbIMGZBKWQ
