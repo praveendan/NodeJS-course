@@ -59,6 +59,7 @@ app.use((req, res, next) => {
 
 //added csrf middleware
 app.use((req, res, next) => {
+  // locals means local variables passed to views
   res.locals.isAuthenticated = req.session.isLoggedIn;
   res.locals.csrfToken = req.csrfToken();
   next();
