@@ -59,6 +59,8 @@ app.use(
   multer({ storage: fileStorage, fileFilter: fileFilter }).single('image')
 );
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/images', express.static(path.join(__dirname, 'images')));
+
 /*
 secret: should be a long text
 resave: false session will not be saved on every response but only something changes
