@@ -21,7 +21,13 @@ router.post('/cart-delete-item', isAuth, shopController.postCartDeleteProduct);
 
 router.get('/checkout', isAuth, shopController.getCheckout);
 
-router.post('/create-order', isAuth, shopController.postOrder);
+/**
+ * this needs to be improved as the user can manually enter this url and make an entry in out db.
+ * to prevent that, we need to add a webhook on stripe. it does not work on localhost though
+ */
+router.get('/checkout/success', shopController.getCheckoutSuccess);
+
+router.get('/checkout/cancel', shopController.getCheckout);
 
 router.get('/orders', isAuth, shopController.getOrders);
 
