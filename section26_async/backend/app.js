@@ -61,10 +61,8 @@ app.use((error, req, res, next) => {
 });
 
 mongoose
-  .connect('mongodb+srv://praveendan:ggRD_8huLz56bum@nodejs-course.27hsh.mongodb.net/mongoose_nodeJS_course_REST?retryWrites=true')
+  .connect('')
   .then(result => {
     app.listen(8080);
   })
   .catch(err => console.log(err));
-
-//password : ggRD_8huLz56bum

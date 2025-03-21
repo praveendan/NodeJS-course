@@ -128,5 +128,3 @@ mongoose
   .catch(err => {
     console.log(err);
   });
-
-//user name praveendan pw:fW9WF1TbIMGZBKWQ
