@@ -54,7 +54,7 @@ app.use(
   graphqlHttp({
     schema: graphqlSchema,
     rootValue: graphqlResolver,
-    graphiql: true
+    graphiql: true //this will add a graphql playground at http://localhost:8080/graphql
   })
 );
 
